@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import ru.aig.Linde.controllers.FileController;
+import ru.aig.Linde.controllers.MainController;
 import ru.aig.Linde.entities.Employee;
 import ru.aig.Linde.repositories.EmployeeRepository;
 import ru.aig.Linde.repositories.GasPricesRepository;
@@ -26,7 +26,7 @@ public class ReportsProducer {
 
     @Bean
     public CommandLineRunner demo(EmployeeRepository employeeRepository, RoleRepository roleRepository,
-                                  FileController fileController, GasPricesRepository gasPricesRepository) {
+                                  MainController mainController, GasPricesRepository gasPricesRepository) {
 
         return args -> {
             log.info("Command line started");
