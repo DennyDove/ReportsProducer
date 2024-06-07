@@ -1,4 +1,4 @@
-package ru.aig.SpringDB.entities;
+package ru.aig.Linde.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

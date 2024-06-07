@@ -2,24 +2,54 @@
 
 let sndButton = document.getElementById("sndButton");
 let fileInput = document.getElementById("uploadForm");
+//let updButton = document.getElementById("updButton");
+let pricesFiles = document.getElementById("pricesFiles");
+
 let responseTextArea = document.getElementById("responseTextArea");
+let responseTextArea1 = document.getElementById("responseTextArea1");
 
-/*
-fileInput.addEventListener('change', (e) => {
-  const fileInfo = e.target.files[0];
-//  console.log("Файл: ${fileInfo.name}");
-  responseTextArea.value = fileInfo.name;
-});
-*/
-
-// Второй вариант создания асинхронной функции (функция без имени):
-sndButton.addEventListener("click", async function() {
-//  createUser(); это в случае первого варианта
-    let selectedFile = fileInput.files[0]; // files[0] - возвращает объект "фаил" из элемента типа input
-    responseTextArea.value = selectedFile.name;
+//(e) => {
+pricesFiles.addEventListener("change", async function() {
 
     let fd = new FormData();
-    fd.append('file', selectedFile); //  долго мучался с реализации загрузки файла на сервер!
+    let pricesList = pricesFiles.files;
+    for(let i=0; i< pricesList.length; i++) {
+        let file = pricesList[i].name;
+        fd.append('file', pricesList[i]);
+        responseTextArea1.value += file;
+    }
+
+    let response = await fetch("http://localhost:8080/updprices", {
+      method: 'POST',
+      body: fd
+    });
+
+    if (response.ok) {
+              alert("Good! Пост запрос успешно прошел!");
+    //        let json = await response.json();
+              let text = await response.text();
+    //        responseTextArea1.value = JSON.stringify(json);
+              responseTextArea1.value = text;
+    } else {
+        alert("Ошибка HTTP: " + response.status);
+    }
+
+});
+
+//
+sndButton.addEventListener("click", async function() {
+
+    let fd = new FormData();
+    let fileList = fileInput.files;
+    for(let i=0; i< fileList.length; i++) {
+        let file = fileList[i].name;
+        fd.append('file', fileList[i]);
+        responseTextArea.value += file;
+    }
+
+
+    //     let fd = new FormData();
+    //    fd.append('file', selectedFile); //  долго мучался с реализации загрузки файла на сервер!
     // ... и всеего-навсего нужно было правильно сформировать body для Post-запроса.
     // ключевой "затык" оказался в этом месте: fd.append('file', selectedFile);
     // нужно было в качестве первого параметра указать "file", чтобы совпадало с @RequestParam("file")
@@ -36,11 +66,11 @@ sndButton.addEventListener("click", async function() {
     });
 
     if (response.ok) {
-        alert("Поздравляем! Пост запрос успешно прошел!");
-
-        let json = await response.json();
-        responseTextArea.value = JSON.stringify(json);
-
+    //        alert("Good! Пост запрос успешно прошел!");
+    //        let json = await response.json();
+              let text = await response.text();
+    //        responseTextArea1.value = JSON.stringify(json);
+              responseTextArea1.value = text;
     } else {
         alert("Ошибка HTTP: " + response.status);
     }

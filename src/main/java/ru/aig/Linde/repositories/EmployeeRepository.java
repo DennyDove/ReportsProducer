@@ -1,9 +1,9 @@
-package ru.aig.SpringDB.repositories;
+package ru.aig.Linde.repositories;
 
 import java.util.List;
 import java.util.Optional;
 
-import ru.aig.SpringDB.entities.Employee;
+import ru.aig.Linde.entities.Employee;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

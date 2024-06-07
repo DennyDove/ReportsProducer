@@ -10,16 +10,23 @@
     <form enctype="multipart/form-data">
         <label for="uploadForm"
         >Select a file:</label>
-        <input type="file"
-               id="uploadForm"
-        />
+        <input type="file" id="uploadForm" multiple/>
         <br /><br />
         <input type="button" id="sndButton" value="Загрузить файл"/>
     </form>
 </div>
 
+<div>
+    <form enctype="multipart/form-data">
+        <label for="pricesFiles"
+        >Update prices:</label>
+        <input type="file" id="pricesFiles" multiple/>
+    </form>
+</div>
+
 <br /><br />
-<textarea id="responseTextArea"></textarea>
+<textarea id="responseTextArea" placeholder="Response text 1"></textarea>
+<textarea id="responseTextArea1" placeholder="Response text 2"></textarea>
 
 <script src="script1.js"></script>
 

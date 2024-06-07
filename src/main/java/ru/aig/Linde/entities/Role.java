@@ -1,11 +1,10 @@
-package ru.aig.SpringDB.entities;
+package ru.aig.Linde.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString; // Для работы параметра mappedBy = "role" --> нужно убирать автоматический метод @ToString
 // Так как это вызывает рекурсию с методом @ToString из класса Employee. Они ссылаются друг на друга.
 // Для устранения рекурсии нужно самостоятельно переопределить методо toString(). См. ниже.
 
