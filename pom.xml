@@ -11,8 +11,8 @@
 	<groupId>ru.aig</groupId>
 	<artifactId>ReportsProducer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demoSpringDB</name>
-	<description>Demo project for Spring DataBase</description>
+	<name>ReportsProducer</name>
+	<description>Corporate reports producer</description>
 	<properties>
 		<java.version>22</java.version>
 	</properties>
@@ -64,6 +64,24 @@
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<version>8.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>5.2.5</version>
 		</dependency>
 
 	</dependencies>

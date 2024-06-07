@@ -22,8 +22,6 @@ public class MainService {
     private double totalSum = 0;
     private double[] compensation = new double[12];
 
-    public XSSFWorkbook xlsx;
-
 //  Главный метод паттерна "Facade"
     public void documentHandler (MultipartFile[] file) {
         calendarUtils = new CalendarUtils();

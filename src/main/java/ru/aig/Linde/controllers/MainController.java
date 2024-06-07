@@ -1,6 +1,5 @@
 package ru.aig.Linde.controllers;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,6 @@ import java.io.IOException;
 //@RequestMapping("/users")  - если повесить данную аннтацию на целый класс, то end-point "/users" появится у всех методов, объявленных в рамках данного класса
 @RestController
 public class MainController {
-
-    XSSFWorkbook xlsx;
 
     @Autowired
     protected MainService mainService;
