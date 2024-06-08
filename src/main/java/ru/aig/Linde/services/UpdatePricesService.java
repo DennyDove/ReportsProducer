@@ -6,7 +6,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.aig.Linde.entities.ElecPrices;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +23,7 @@ public class UpdatePricesService {
 
     private List<XSSFWorkbook> xlsx = new ArrayList<>();
 
+//  Метод заносит цены на газ и электроэнерию а базу данных
     public void persistPricesDB(MultipartFile[] file) {
         for (int i = 0; i < file.length; i++) {
             xlsx = open(file);

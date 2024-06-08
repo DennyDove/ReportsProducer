@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class WordDocument {
     private HWPFDocument doc;
     private List<Double> counterValues;
-//  Counter H2 values
+//  Counter H2 values (поля объявлены статическими для более оптимального доступа)
     @Getter private static Double H2_C_counterStart;
     @Getter private static Double H2_C_counterEnd;
     @Getter private static Double H2_D_counterStart;
@@ -49,11 +49,6 @@ public class WordDocument {
     }
 
     private HWPFDocument openDoc(MultipartFile file) {
-/*      Первоначальный вариант:
-//      byte[] bytes = file.getBytes(); // данный метод применяем, если не используем InputStream
-        InputStream is = file.getInputStream();
-        HWPFDocument doc = new HWPFDocument(is);
-        is.close(); */
         try (InputStream is = file.getInputStream()) { // try-with-resources
             doc = new HWPFDocument(is);
         } catch (IOException e) {
@@ -79,5 +74,4 @@ public class WordDocument {
         }
         return counterValues;
     }
-
 }

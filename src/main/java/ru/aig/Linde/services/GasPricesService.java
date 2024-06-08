@@ -1,11 +1,8 @@
 package ru.aig.Linde.services;
 
-//import jakarta.persistence.EntityManager;
-//import jakarta.transaction.Transactional;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.aig.Linde.entities.ElecPrices;
 import ru.aig.Linde.entities.GasPrices;
 import ru.aig.Linde.repositories.GasPricesRepository;
 

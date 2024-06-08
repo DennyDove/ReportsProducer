@@ -8,9 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-public class ExcelReport2 {
+public class ExcelReport2 extends ExcelDocument {
 
-    private XSSFWorkbook xlsx;
     private final String consReport = "src/main/resources/templates/total_sums.xlsx";
 
     public ExcelReport2(double[] compensation) {
@@ -22,16 +21,7 @@ public class ExcelReport2 {
         save();
     }
 
-    public XSSFWorkbook open(String xlsxDoc)  {
-        try (FileInputStream is = new FileInputStream(xlsxDoc)) { // try-with-resources
-            xlsx = new XSSFWorkbook(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return xlsx;
-    }
-
-//      Выгрузка отчетного файла на жесткий диск на период отладки программы
+//  Выгрузка отчетного файла на жесткий диск на период отладки программы
     private void save() {
         try {
             FileOutputStream output = new FileOutputStream("D:/Works/IT/Compensation.xlsx");

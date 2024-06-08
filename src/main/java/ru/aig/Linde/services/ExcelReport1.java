@@ -1,18 +1,16 @@
 package ru.aig.Linde.services;
 
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.aig.Linde.utils.CalendarUtils;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 @Service
-public class ExcelReport1 {
+public class ExcelReport1 extends ExcelDocument {
 
     @Autowired
     ElecPricesService elecPricesService;
@@ -21,20 +19,10 @@ public class ExcelReport1 {
     GasPricesService gasPricesService;
 
     private CalendarUtils calendarUtils;
-    private XSSFWorkbook xlsx;
     private final double coefficient = 1.07322;
     private final String templateXLSX = "src/main/resources/templates/compcalc.xlsx";
-    private final String consReport = "src/main/resources/templates/consolidation.xlsx";
 
-    public XSSFWorkbook open(String xlsxDoc)  {
-        try (FileInputStream is = new FileInputStream(xlsxDoc)) { // try-with-resources
-            xlsx = new XSSFWorkbook(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return xlsx;
-    }
-
+//  Выгрузка отчетного файла на жесткий диск на период отладки программы
     public double save(int month, String year) {
         double compensationSum = xlsx.getSheetAt(0).getRow(81).getCell(2).getNumericCellValue();
 //                                                                           month+1 т.к. здесь нам не нужно ориентироваться на массив, где порядковые номера начинаются с нуля
@@ -45,19 +33,6 @@ public class ExcelReport1 {
         }
         return compensationSum;
     }
-
-    /*
-public XSSFWorkbook save(int month, String year) {
-    double compensationSum = xlsx.getSheetAt(0).getRow(81).getCell(2).getNumericCellValue();
-//                                                                           month+1 т.к. здесь нам не нужно ориентироваться на массив, где порядковые номера начинаются с нуля
-    try (FileOutputStream output = new FileOutputStream("d:/Works/IT/"+(month+1)+"_monthly_power_compensation_Klin 20"+year+".xlsx")) { // try-with-resources
-        xlsx.write(output);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    return xlsx;
-}
-*/
 
     public void inputCounterValues() {
         xlsx = open(templateXLSX);
