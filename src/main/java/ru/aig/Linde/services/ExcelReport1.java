@@ -26,7 +26,7 @@ public class ExcelReport1 extends ExcelDocument {
     public double save(int month, String year) {
         double compensationSum = xlsx.getSheetAt(0).getRow(81).getCell(2).getNumericCellValue();
 //                                                                           month+1 т.к. здесь нам не нужно ориентироваться на массив, где порядковые номера начинаются с нуля
-        try (FileOutputStream output = new FileOutputStream("d:/Works/IT/"+(month+1)+"_monthly_power_compensation_Klin 20"+year+".xlsx")) { // try-with-resources
+        try (FileOutputStream output = new FileOutputStream("src/main/reports/"+(month+1)+"_monthly_power_compensation_Klin 20"+year+".xlsx")) { // try-with-resources
             xlsx.write(output);
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,14 +37,14 @@ public class ExcelReport1 extends ExcelDocument {
     public void inputCounterValues() {
         xlsx = open(templateXLSX);
 //      Input values counter in excel
-        xlsx.getSheetAt(0).getRow(24).getCell(1).setCellValue(WordDocument.getH2_C_counterStart());
-        xlsx.getSheetAt(0).getRow(22).getCell(1).setCellValue(WordDocument.getH2_C_counterEnd());
-        xlsx.getSheetAt(0).getRow(24).getCell(4).setCellValue(WordDocument.getH2_D_counterStart());
-        xlsx.getSheetAt(0).getRow(22).getCell(4).setCellValue(WordDocument.getH2_D_counterEnd());
-        xlsx.getSheetAt(0).getRow(39).getCell(1).setCellValue(WordDocument.getElec_C_counterStart());
-        xlsx.getSheetAt(0).getRow(37).getCell(1).setCellValue(WordDocument.getElec_C_counterEnd());
-        xlsx.getSheetAt(0).getRow(39).getCell(4).setCellValue(WordDocument.getElec_D_counterStart());
-        xlsx.getSheetAt(0).getRow(37).getCell(4).setCellValue(WordDocument.getElec_D_counterEnd());
+        xlsx.getSheetAt(0).getRow(24).getCell(1).setCellValue(ActDoc.getH2_C_counterStart());
+        xlsx.getSheetAt(0).getRow(22).getCell(1).setCellValue(ActDoc.getH2_C_counterEnd());
+        xlsx.getSheetAt(0).getRow(24).getCell(4).setCellValue(ActDoc.getH2_D_counterStart());
+        xlsx.getSheetAt(0).getRow(22).getCell(4).setCellValue(ActDoc.getH2_D_counterEnd());
+        xlsx.getSheetAt(0).getRow(39).getCell(1).setCellValue(ActDoc.getElec_C_counterStart());
+        xlsx.getSheetAt(0).getRow(37).getCell(1).setCellValue(ActDoc.getElec_C_counterEnd());
+        xlsx.getSheetAt(0).getRow(39).getCell(4).setCellValue(ActDoc.getElec_D_counterStart());
+        xlsx.getSheetAt(0).getRow(37).getCell(4).setCellValue(ActDoc.getElec_D_counterEnd());
     }
 
     public void inputGasPrices(int month) {

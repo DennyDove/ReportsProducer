@@ -9,7 +9,6 @@ import java.io.IOException;
 public class ExcelDocument {
     protected XSSFWorkbook xlsx;
     protected CalendarUtils calendarUtils;
-    protected double totalSum = 0;
     protected double[] compensation = new double[12];
 
     public XSSFWorkbook open(String xlsxDoc)  {

@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //@Getter --> аннотация не применяется к статическим полям
-public class WordDocument {
+public class ActDoc {
     private HWPFDocument doc;
     private List<Double> counterValues;
 //  Counter H2 values (поля объявлены статическими для более оптимального доступа)
@@ -31,7 +31,7 @@ public class WordDocument {
     @Getter private static Double elec_price;
     @Getter private static Double gas_price;
 
-    public WordDocument(MultipartFile file) {
+    public ActDoc(MultipartFile file) {
         doc = openDoc(file);
         counterValues = parseDocument(doc);
 

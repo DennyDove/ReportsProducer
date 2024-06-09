@@ -16,6 +16,7 @@ public class ExcelReport2 extends ExcelDocument {
         xlsx = open(consReport);
         for(int i =0; i < 12; i++) {
             xlsx.getSheetAt(0).getRow(5+i).getCell(1).setCellValue(compensation[i]);
+            compensation[i] = 0;
         }
         XSSFFormulaEvaluator.evaluateAllFormulaCells(xlsx);
         save();
@@ -24,7 +25,7 @@ public class ExcelReport2 extends ExcelDocument {
 //  Выгрузка отчетного файла на жесткий диск на период отладки программы
     private void save() {
         try {
-            FileOutputStream output = new FileOutputStream("D:/Works/IT/Compensation.xlsx");
+            FileOutputStream output = new FileOutputStream("src/main/reports/Compensation.xlsx");
             xlsx.write(output);
             output.close();
         } catch (IOException e) {

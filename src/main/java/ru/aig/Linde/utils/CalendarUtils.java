@@ -16,69 +16,10 @@ public class CalendarUtils {
 //  Временное упрощение
 //    private String year = "2024";
 
-    private String startPeriod = "";
-    private String endPeriod = "";
-
-    private String January = "01.01.";
-    private String February = "01.02.";
-    private String March = "01.03.";
-    private String April = "01.04.";
-    private String May = "01.05.";
-    private String June = "01.06.";
-    private String July = "01.07.";
-    private String August = "01.08.";
-    private String September = "01.09.";
-    private String October = "01.10.";
-    private String November = "01.11.";
-    private String December = "01.12.";
+    private String startDate = "";
+    private String endDate = "";
 
     private float hoursInMonth = 0;
-
-    public CalendarUtils(String startPeriod, String endPeriod) {
-        this.startPeriod = startPeriod;
-        this.endPeriod = endPeriod;
-    }
-
-
-
-/*
-    String getStartPeriod(int month){
-        if(month == Project1.JANUARY) startPeriod = January+year;
-        if(month == Project1.FEBRUARY) startPeriod = February+year;
-        if(month == Project1.MARCH) startPeriod = March+year;
-        if(month == Project1.APRIL) startPeriod = April+year;
-        if(month == Project1.MAY) startPeriod = May+year;
-        if(month == Project1.JUNE) startPeriod = June+year;
-        if(month == Project1.JULY) startPeriod = July+year;
-        if(month == Project1.AUGUST) startPeriod = August+year;
-        if(month == Project1.SEPTEMBER) startPeriod = September+year;
-        if(month == Project1.OCTOBER) startPeriod = October+year;
-        if(month == Project1.NOVEMBER) startPeriod = November+year;
-        if(month == Project1.DECEMBER) startPeriod = December+year;
-        return startPeriod;
-    }
-
-    String getEndPeriod(int month){
-        if(month == Project1.JANUARY) endPeriod = February+year;
-        if(month == Project1.FEBRUARY) endPeriod = March+year;
-        if(month == Project1.MARCH) endPeriod = April+year;
-        if(month == Project1.APRIL) endPeriod = May+year;
-        if(month == Project1.MAY) endPeriod = June+year;
-        if(month == Project1.JUNE) endPeriod = July+year;
-        if(month == Project1.JULY) endPeriod = August+year;
-        if(month == Project1.AUGUST) endPeriod = September+year;
-        if(month == Project1.SEPTEMBER) endPeriod = October+year;
-        if(month == Project1.OCTOBER) endPeriod = November+year;
-        if(month == Project1.NOVEMBER) endPeriod = December+year;
-        if(month == Project1.DECEMBER) {
-            int next_year = Integer.parseInt(year)+1;
- //           String next_year = String.valueOf(calc_next_year);
-            endPeriod = January+next_year;
-        }
-        return endPeriod;
-    }
-
- */
 
 //  Определяем месяц из названия файла
 public int getMonth(MultipartFile file) {
@@ -92,7 +33,7 @@ public int getMonth(MultipartFile file) {
 //  Определяем год из названия файла
     public String getYear(MultipartFile file) {
         String year;
-        year = file.getOriginalFilename().substring(3, 5);
+        year = "20"+file.getOriginalFilename().substring(3, 5);
         return year;
     }
 
@@ -121,8 +62,8 @@ public int getMonth(MultipartFile file) {
         int yearInt = 2000 + Integer.parseInt(year);
         year = String.valueOf(yearInt);
 
-        startPeriod = day + "." + month + "." + year;
-        return startPeriod;
+        startDate = day + "." + month + "." + year;
+        return startDate;
     }
 
     //  Генерируем конечную дату в нужном цифровом формате
@@ -137,7 +78,7 @@ public int getMonth(MultipartFile file) {
         int yearInt = 2000 + Integer.parseInt(year);
         year = String.valueOf(yearInt);
 
-        endPeriod = day + "." + month + "." + year;
-        return endPeriod;
+        endDate = day + "." + month + "." + year;
+        return endDate;
     }
 }
