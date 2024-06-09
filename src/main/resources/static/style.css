@@ -1,0 +1,138 @@
+/* Редакция от 09.06.2024 */
+/* Редакция от 24.02.2010 */
+
+body, html {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	outline-style: none;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.active {
+	color: #9999FF;
+}
+
+p {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+p.text {
+/*	text-indent: 2em; */
+}
+span.underlined_text {
+	text-decoration: underline;
+}
+
+span.red_text {
+	color: #FF0066;
+}
+
+a { /* установка малинового цвета для всех гиперссылок */
+	font-size: 12px;
+	font-weight: normal;
+	color: #FF0066;
+}
+
+li {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 21px;
+	color: #0000CD;
+}
+h2 {
+	font-size: 16px;
+}
+h3 {
+	font-size: 12px;
+}
+
+#container{
+margin: 0 auto; /*обнуление полей и отступов, т.к. различные браузеры их по разному воспринимают. */
+text-align: left; /*Отменяем tex-align:center заданное в body. Делаем чтобы весь текст в макете выравнивался по левому краю */
+
+width: 100%;
+min-height: 100%;
+height: auto  !important;
+height: 100%;
+position: relative;
+
+min-width: 1037px; /*задаем минимальную ширину макета в современных браузерах */
+width: expression(  /*задаем минимальную ширину макета в старых версия браузера.*/
+(document.compatMode && document.compatMode == 'CSS1Compat')
+?
+(document.documentElement.clientWidth < 1037
+? "1037px" : "auto") : (document.body.clientWidth < 1037px
+? "1037px" : "auto"));}
+
+/*
+#logo {
+	margin: 0px;
+	padding: 0px;
+	height: 100px;
+	width: 105px;
+	vertical-align: top;
+	position: relative;
+	background-image:  url(images/logo.jpg);
+}
+*/
+
+/* Стили первого блока */
+#block1 {
+//	background-color: #00FFFF;
+		margin: 0px;
+    padding-left: 23px;
+    height: 77px;
+		width: 100%;
+		position: relative;
+		background-image:  url(images/metal_background.jpg);
+		background-repeat: repeat-x;
+
+		font-size: 14px;
+		font-weight: bolder;
+}
+
+#block2 {
+//		background-color: #00FFFF;
+		margin-top: 55px;
+    padding-left: 13px;
+    padding-top: 0px;
+    height: 77px;
+		width: 100%;
+		position: relative;
+		vertical-align: bottom;
+
+		font-size: 14px;
+		font-weight: bolder;
+}
+
+/* Стили отдельных элементов*/
+#pricesFiles {
+	margin-right: 0px;
+	padding-left: 110px;
+	padding-top: 12px;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+#uploadForm {
+	margin-right: 0px;
+	padding-left: 0px;
+	padding-top: 12px;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+#sndButton {
+	padding: 7px;
+	margin-top: 17px;
+	margin-left: 13px;
+	font-size: 12px;
+	font-weight: normal;
+	color: #4B0082;
+}
