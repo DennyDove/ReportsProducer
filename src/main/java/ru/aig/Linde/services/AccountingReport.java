@@ -92,7 +92,7 @@ public class AccountingReport {
     }
 
     public void save() {
-        String file = "src/main/reports/out_report.docx";
+        String file = "src/main/reports/accounting_report.docx";
         try {
             FileOutputStream output = new FileOutputStream(file);
             docx.write(output);
