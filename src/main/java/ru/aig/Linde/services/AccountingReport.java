@@ -6,6 +6,7 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import ru.aig.Linde.utils.SumDTO;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,13 +15,17 @@ import java.util.List;
 public class AccountingReport {
 
     private XWPFDocument docx;
-    private final String templateDocx = "src/main/resources/templates/Акт о платежах_v1.docx";
+
+    //Реализация загрузки шаблонов файлов прямо из jar - не работает
+    //final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+
+    private String templateDocx = "c:/templates/Акт о платежах_v1.docx";
 
     public AccountingReport() {
     }
 
     public void inputValuesDocx(List<SumDTO> sumList) {
-        docx = openDocx();
+        docx = open();
         int numberOfMonths = sumList.size();
         String totalSum = numericFormat(totalSum(sumList));
         String startPeriod = sumList.get(0).getStartPeriod();
@@ -82,7 +87,7 @@ public class AccountingReport {
         return resultNumber;
     }
 
-    private XWPFDocument openDocx() {
+    private XWPFDocument open() {
         try (FileInputStream is = new FileInputStream(templateDocx)) { // try-with-resources
             docx = new XWPFDocument(is);
         } catch (IOException e) {
@@ -91,8 +96,9 @@ public class AccountingReport {
         return docx;
     }
 
-    public void save() {
-        String file = "src/main/reports/accounting_report.docx";
+    public byte[] save() {
+//      String file = "src/main/reports/accounting_report.docx";
+        String file = "c:/reports/accounting_report.docx";
         try {
             FileOutputStream output = new FileOutputStream(file);
             docx.write(output);
@@ -100,6 +106,12 @@ public class AccountingReport {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        byte[] result = null;
+        try (FileInputStream input = new FileInputStream(file)) {
+            result = input.readAllBytes();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

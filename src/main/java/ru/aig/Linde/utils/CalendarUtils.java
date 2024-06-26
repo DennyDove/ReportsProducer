@@ -16,13 +16,13 @@ public class CalendarUtils {
 //  Временное упрощение
 //    private String year = "2024";
 
-    private String startDate = "";
-    private String endDate = "";
+    private static String startDate = "";
+    private static String endDate = "";
 
-    private float hoursInMonth = 0;
+    private static float hoursInMonth = 0;
 
 //  Определяем месяц из названия файла
-public int getMonth(MultipartFile file) {
+public static int getMonth(MultipartFile file) {
     String num;
     int month;
     num = file.getOriginalFilename().substring(0, 2);
@@ -31,14 +31,14 @@ public int getMonth(MultipartFile file) {
 }
 
 //  Определяем год из названия файла
-    public String getYear(MultipartFile file) {
+    public static String getYear(MultipartFile file) {
         String year;
         year = "20"+file.getOriginalFilename().substring(3, 5);
         return year;
     }
 
 //  Определяем число часов в месяце
-    public double getHoursInMonth(MultipartFile file) {
+    public static double getHoursInMonth(MultipartFile file) {
         String num1;
         String num2;
 
@@ -55,28 +55,28 @@ public int getMonth(MultipartFile file) {
     }
 
     //  Генерируем начальную дату в нужном цифровом формате
-    public String getStartDate(MultipartFile file) {
+    public static String getStartDate(MultipartFile file) {
         String day = "01";
         String month = file.getOriginalFilename().substring(0,2);
-        String year = file.getOriginalFilename().substring(3,5);
-        int yearInt = 2000 + Integer.parseInt(year);
-        year = String.valueOf(yearInt);
+        String year = "20" + file.getOriginalFilename().substring(3,5);
+//        int yearInt = 2000 + Integer.parseInt(year);
+//        year = String.valueOf(yearInt);
 
         startDate = day + "." + month + "." + year;
         return startDate;
     }
 
     //  Генерируем конечную дату в нужном цифровом формате
-    public String getEndDate(MultipartFile file) {
+    public static String getEndDate(MultipartFile file) {
         String day = "01";
         String month = file.getOriginalFilename().substring(0,2);
         int monthInt = Integer.parseInt(month) + 1; // месяц увеличиваем на 1
         if(monthInt<10) month = "0" + monthInt;
         else if(monthInt >10) month = String.valueOf(monthInt);
 
-        String year = file.getOriginalFilename().substring(3,5);
-        int yearInt = 2000 + Integer.parseInt(year);
-        year = String.valueOf(yearInt);
+        String year = "20" + file.getOriginalFilename().substring(3,5);
+//        int yearInt = 2000 + Integer.parseInt(year);
+//        year = String.valueOf(yearInt);
 
         endDate = day + "." + month + "." + year;
         return endDate;

@@ -10,7 +10,6 @@ let responseTextArea1 = document.getElementById("responseTextArea1");
 
 //(e) => {
 pricesFiles.addEventListener("change", async function() {
-
     let fd = new FormData();
     let pricesList = pricesFiles.files;
     for(let i=0; i< pricesList.length; i++) {
@@ -35,6 +34,21 @@ pricesFiles.addEventListener("change", async function() {
     }
 
 });
+
+// Данная функуция обеспечивает загрузку файла непосредственно в браузер
+var saveByteArray = (function () {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    return function (data, name) {
+        var blob = data,
+        url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}());
 
 //
 sndButton.addEventListener("click", async function() {
@@ -68,9 +82,11 @@ sndButton.addEventListener("click", async function() {
     if (response.ok) {
     //        alert("Good! Пост запрос успешно прошел!");
     //        let json = await response.json();
-              let text = await response.text();
+    //        let text = await response.text();
+              let blob_file = await response.blob();
     //        responseTextArea1.value = JSON.stringify(json);
-              responseTextArea1.value = text;
+    //        responseTextArea1.value = text;
+              saveByteArray(blob_file, 'report.docx');
     } else {
         alert("Ошибка HTTP: " + response.status);
     }

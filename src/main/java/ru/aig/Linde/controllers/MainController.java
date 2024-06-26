@@ -1,7 +1,7 @@
 package ru.aig.Linde.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.aig.Linde.services.UpdatePricesService;
@@ -27,12 +27,23 @@ public class MainController {
     }
 
     @PostMapping(value = "/uploadoc")
+    public HttpEntity<byte[]> uploadDoc(@RequestParam("file") MultipartFile[] file) throws IOException {
+
+        byte[] result = mainService.documentHandler(file);
+
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        header.setContentDisposition(ContentDisposition.attachment()
+                .filename("test.docx").build());
+        header.setContentLength(result.length);
+
+        return new HttpEntity<byte[]>(result, header);
+    }
+    /*
     public ResponseEntity<?> uploadDoc(@RequestParam("file") MultipartFile[] file) throws IOException {
 
         mainService.documentHandler(file);
-
         return ResponseEntity.ok("Great!");
-
 //        return ResponseEntity.ok().contentType(MediaType.MULTIPART_FORM_DATA)...
 /*
         HttpHeaders headers = new HttpHeaders();
@@ -45,10 +56,8 @@ public class MainController {
         return ResponseEntity.ok().headers(headers).contentLength(file2Upload.length())
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(i);
-*/
-
-    }
-
+     }
+     */
 /*
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserAlternative(@PathVariable("id") Long id) {

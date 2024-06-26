@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 @Service
-public class ExcelReport1 extends ExcelDocument {
+public class CalcSheet extends ExcelDocument {
 
     @Autowired
     ElecPricesService elecPricesService;
@@ -18,15 +18,21 @@ public class ExcelReport1 extends ExcelDocument {
     @Autowired
     GasPricesService gasPricesService;
 
-    private CalendarUtils calendarUtils;
     private final double coefficient = 1.07322;
-    private final String templateXLSX = "src/main/resources/templates/compcalc.xlsx";
+    private final String template_xlsx = "c:/templates/compcalc.xlsx";
+
+/*  Вариант определения абсолютного пути фвйла, чтобы была универсальность. Не работает с jar
+    private final String path = "src/main/resources/templates";
+    private final String path = "src/main/resources/templates";
+    private final File file = new File(path);
+    private final String sumsReport = file.getAbsolutePath() + "/compcalc.xlsx";
+*/
 
 //  Выгрузка отчетного файла на жесткий диск на период отладки программы
     public double save(int month, String year) {
         double compensationSum = xlsx.getSheetAt(0).getRow(81).getCell(2).getNumericCellValue();
 //                                                                           month+1 т.к. здесь нам не нужно ориентироваться на массив, где порядковые номера начинаются с нуля
-        try (FileOutputStream output = new FileOutputStream("src/main/reports/"+(month+1)+"_monthly_power_compensation_Klin 20"+year+".xlsx")) { // try-with-resources
+        try (FileOutputStream output = new FileOutputStream("c:/reports/"+(month+1)+"_monthly_power_compensation_Klin 20"+year+".xlsx")) { // try-with-resources
             xlsx.write(output);
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,7 +41,7 @@ public class ExcelReport1 extends ExcelDocument {
     }
 
     public void inputCounterValues() {
-        xlsx = open(templateXLSX);
+        xlsx = open(template_xlsx);
 //      Input values counter in excel
         xlsx.getSheetAt(0).getRow(24).getCell(1).setCellValue(ActDoc.getH2_C_counterStart());
         xlsx.getSheetAt(0).getRow(22).getCell(1).setCellValue(ActDoc.getH2_C_counterEnd());
@@ -60,12 +66,11 @@ public class ExcelReport1 extends ExcelDocument {
     }
 
     public void inputCalendarValues(MultipartFile file) {
-        calendarUtils = new CalendarUtils();
-        double hoursInMonth = calendarUtils.getHoursInMonth(file);
+        double hoursInMonth = CalendarUtils.getHoursInMonth(file);
 
 //      Устанавливаем начальную и конечную дату
-        xlsx.getSheetAt(0).getRow(4).getCell(1).setCellValue(calendarUtils.getStartDate(file));
-        xlsx.getSheetAt(0).getRow(5).getCell(1).setCellValue(calendarUtils.getEndDate(file));
+        xlsx.getSheetAt(0).getRow(4).getCell(1).setCellValue(CalendarUtils.getStartDate(file));
+        xlsx.getSheetAt(0).getRow(5).getCell(1).setCellValue(CalendarUtils.getEndDate(file));
 
 //      Вносим число часов в месяце
         xlsx.getSheetAt(0).getRow(18).getCell(1).setCellValue(hoursInMonth);

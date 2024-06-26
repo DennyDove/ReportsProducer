@@ -7,13 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.aig.Linde.services.AccountingReport;
 import ru.aig.Linde.services.MainService;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class TestRun {
 
@@ -108,7 +105,74 @@ public class TestRun {
         accountingReport.saveDocxFile();
 */
 
+        /*
+        String path = "src/main/resources/templates/compcalc.xlsx";
+        File file = new File(path);
+        String templateXLSX = file.getAbsolutePath();
+        System.out.println(templateXLSX);
+        */
+
+    /*
+        String path = "src/main/resources/templates";
+        File file = new File(path);
+        String templateXLSX = file.getAbsolutePath() + "/compcalc.xlsx";
+
+     //   final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+
+
+        try {
+            FileInputStream is = new FileInputStream(templateXLSX);
+            xlsx = new XSSFWorkbook(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (FileOutputStream output = new FileOutputStream("monthly_power_compensation_Klin.xlsx")) { // try-with-resources
+            xlsx.write(output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+        /*
+        //Разобрался как из JAR файла делать выгрузку
+        //String template = "D:/Works/IT/ReportsProducer/ReportsProducer_v2.jar";
+        String template = "ReportsProducer_v2.jar";
+
+        //String res = tr.getClass().getName();
+        File file = new File(template);
+        String absolutePath = file.getAbsolutePath();
+
+        System.out.println(absolutePath);
+
+        try {
+            JarFile jar = new JarFile(template);
+            final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
+            while(entries.hasMoreElements()) {
+                final String name = entries.nextElement().getName();
+                if (name.contains("compcalc.xlsx")) { //filter according to name
+                    JarEntry jarEntry = new JarEntry(name);
+                    try (InputStream is = jar.getInputStream(jarEntry)) {
+                        xlsx = new XSSFWorkbook(is);
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Записываем извлеченный JAR-файл на диск
+        try (FileOutputStream output = new FileOutputStream("monthly_power_compensation_Klin.xlsx")) { // try-with-resources
+            xlsx.write(output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    */
 
     }
 }
+
+
 
