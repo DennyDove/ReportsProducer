@@ -16,9 +16,6 @@ public class MainService extends ExcelDocument {
     @Autowired
     CalcSheet calcSheet;
 
-    @Autowired
-    UpdatePricesService updatePricesService;
-
     private ActDoc actDoc;
     private SumSheet sumSheet;
     private AccountingReport accountingReport;

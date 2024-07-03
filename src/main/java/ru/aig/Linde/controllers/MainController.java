@@ -29,15 +29,15 @@ public class MainController {
     @PostMapping(value = "/uploadoc")
     public HttpEntity<byte[]> uploadDoc(@RequestParam("file") MultipartFile[] file) throws IOException {
 
-        byte[] result = mainService.documentHandler(file);
+        byte[] report = mainService.documentHandler(file);
 
         HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         header.setContentDisposition(ContentDisposition.attachment()
-                .filename("test.docx").build());
-        header.setContentLength(result.length);
+                .filename("report.docx").build());
+        header.setContentLength(report.length);
 
-        return new HttpEntity<byte[]>(result, header);
+        return new HttpEntity<byte[]>(report, header);
     }
     /*
     public ResponseEntity<?> uploadDoc(@RequestParam("file") MultipartFile[] file) throws IOException {
